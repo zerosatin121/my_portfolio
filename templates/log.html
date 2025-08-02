@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daily Log</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-mono p-6">
+  <h1 class="text-3xl font-bold mb-4">📓 Daily Log</h1>
+  <p class="mb-6 text-gray-700">Write what you learned or hunted today and choose where to post it.</p>
+
+  <form class="space-y-4">
+    <input type="date" class="w-full p-2 border rounded" />
+    <textarea placeholder="Write your thoughts..." class="w-full p-2 border rounded h-32"></textarea>
+    <select class="w-full p-2 border rounded">
+      <option value="">Choose where to post</option>
+      <option value="audit">Smart Contract Audit</option>
+      <option value="bug">Bug Hunting</option>
+    </select>
+    <button class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Post Entry</button>
+  </form>
+
+  <a href="/" class="mt-10 inline-block text-sm text-gray-600 underline hover:text-black">← Back to Home</a>
+</body>
+</html>
