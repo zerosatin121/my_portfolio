@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZeroSatin121's Landing Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="/static/style.css" />
-</head>
+  <!-- <link rel="stylesheet" href="/static/style.css" /> -->
+<!-- </head>
 <body>
   <div class="split left"></div>
   <div class="split right"></div>
@@ -37,4 +38,57 @@
 
   <script src="/static/script.js"></script>
 </body>
+</html> --> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero's Landing Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="h-screen w-screen overflow-hidden font-mono">
+
+  <div class="flex h-full">
+    <!-- Left Column -->
+    <div class="w-1/2 bg-white"></div>
+
+    <!-- Right Column -->
+    <div class="w-1/2 bg-black"></div>
+
+    <!-- Centered Content -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10 text-center">
+      <img src="/static/profile.jpeg" alt="Zero" class="w-40 h-40 rounded-full border-4 border-gray-300 shadow-lg object-cover" />
+      <h1 class="mt-4 text-2xl font-bold text-gray-800 dark:text-white">Zero</h1>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300 italic">
+        Offensive Security Researcher | Learning Smart Contract Audit | Bug Bounty Hunter
+      </p>
+      <a href="/about" class="mt-6 text-sm text-gray-600 dark:text-gray-300 underline hover:text-blue-400">
+  Learn more about what I do →
+</a>
+
+      <div class="mt-6 flex gap-4">
+        <a href="https://github.com/yourusername" target="_blank" class="text-white bg-gray-800 p-3 rounded-full hover:scale-110 transition" title="GitHub">
+          <i class="fab fa-github text-xl"></i>
+        </a>
+        <a href="https://x.com/yourusername" target="_blank" class="text-blue-400 bg-black p-3 rounded-full hover:scale-110 transition" title="X">
+          <i class="fab fa-x-twitter text-xl"></i>
+        </a>
+        <a href="mailto:you@example.com" class="text-white bg-gray-700 p-3 rounded-full hover:scale-110 transition" title="Email">
+          <i class="fas fa-envelope text-xl"></i>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-white bg-blue-700 p-3 rounded-full hover:scale-110 transition" title="LinkedIn">
+          <i class="fab fa-linkedin-in text-xl"></i>
+        </a>
+        <a href="tel:+254700000000" class="text-white bg-green-600 p-3 rounded-full hover:scale-110 transition" title="Phone">
+          <i class="fas fa-phone-alt text-xl"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
+
