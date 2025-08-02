@@ -1,0 +1,89 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.split {
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+  background-color: #f0f0f0;
+}
+
+.right {
+  right: 0;
+  background-color: #1a1a1a;
+}
+
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #333;
+}
+
+.profile-pic {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid #ccc;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.name {
+  margin-top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.tagline {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+
+ .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background: #222;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 22px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.icon.github { background: #333; }
+.icon.x { background: #000; color: #1DA1F2; }
+.icon.email { background: #444; }
+.icon.linkedin { background: #0077b5; }
+.icon.phone { background: #008000; }
+
+.icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0,255,255,0.4);
+}
