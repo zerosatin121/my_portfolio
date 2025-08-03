@@ -1,1 +1,1 @@
-[{"log_date":"2025-08-03","thoughts":"sql injection","category":"bug","tools":"","day":"1"}]
+[{"log_date":"2025-08-03","thoughts":"various way of bypassing otp either phone related or email related .\n moslty based on hackerone reports repsonse manipulation , via reset password , bruteforcing in places where rate limiting hasent been not been impelemented well.","category":"bug","tools":"","day":"1"}]
