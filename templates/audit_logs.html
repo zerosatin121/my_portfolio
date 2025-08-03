@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Daily Log</title>
+  <meta charset="UTF-8">
+  <title>Audit Logs</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-mono p-6">
+<body class="bg-gray-100 font-mono p-6">
   <!-- 🌐 Minimalist Navbar with Bounce -->
   <nav class="w-full px-6 py-4 flex justify-between items-center text-black font-mono">
     <div class="text-lg font-bold">ZeroSatin121</div>
@@ -22,35 +22,27 @@
         <span class="hover:text-blue-600 transition-colors">Log Progress</span>
         <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
       </a> -->
-      <a href="/audit-logs" class="relative group hover:animate-gentle-bounce transition duration-300">
+      <!-- <a href="/audit-logs" class="relative group hover:animate-gentle-bounce transition duration-300">
         <span class="hover:text-blue-600 transition-colors">Audit Logs</span>
         <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-      </a>
+      </a> -->
       <a href="/bug-logs" class="relative group hover:animate-gentle-bounce transition duration-300">
         <span class="hover:text-blue-600 transition-colors">Bug Logs</span>
         <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
       </a>
     </div>
   </nav>
-  <h1 class="text-3xl font-bold mb-4">📓 Daily Log</h1>
-  <p class="mb-6 text-gray-700">Log your progress for Smart Contract Audit or Bug Hunting.</p>
+  <h1 class="text-3xl font-bold mb-6">🧠 Smart Contract Audit Logs</h1>
 
-  <form class="space-y-4" method="POST" action="/submit-log">
-    <input type="date" name="log_date" class="w-full p-2 border rounded" required />
-    <textarea name="thoughts" placeholder="What did you learn or find?" class="w-full p-2 border rounded h-32" required></textarea>
-    <select name="category" class="w-full p-2 border rounded" required>
-      <option value="">Choose category</option>
-      <option value="audit">Smart Contract Audit</option>
-      <option value="bug">Bug Hunting</option>
-    </select>
-    <input type="text" name="tools" placeholder="Tools used (optional)" class="w-full p-2 border rounded" />
-    <input type="number" name="day" placeholder="Day #" class="w-full p-2 border rounded" />
-    <button class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Submit Log</button>
-  </form>
-
-  <div class="mt-10 space-x-4">
-    <a href="/audit-logs" class="text-sm text-blue-600 underline hover:text-blue-800">View Audit Logs</a>
-    <a href="/bug-logs" class="text-sm text-blue-600 underline hover:text-blue-800">View Bug Logs</a>
+  {{range .Logs}}
+  <div class="border p-4 mb-4 bg-white rounded shadow">
+    <p><strong>Date:</strong> {{.LogDate}}</p>
+    <p><strong>Day:</strong> {{.Day}}</p>
+    <p><strong>Thoughts:</strong> {{.Thoughts}}</p>
+    <p><strong>Tools:</strong> {{.Tools}}</p>
   </div>
+  {{end}}
+
+  <a href="/daily-log" class="text-sm text-gray-600 underline hover:text-black">← Back to Log</a>
 </body>
 </html>

@@ -1,0 +1,28 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{template "title" .}}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-mono">
+
+  <nav class="bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
+    <div class="text-lg font-bold">ZeroSatin121</div>
+    <div class="space-x-4 text-sm">
+      <a href="/" class="hover:text-blue-400">Home</a>
+      <a href="/about" class="hover:text-blue-400">About</a>
+      <a href="/daily-log" class="hover:text-blue-400">Log Progress</a>
+      <a href="/audit-logs" class="hover:text-blue-400">Audit Logs</a>
+      <a href="/bug-logs" class="hover:text-blue-400">Bug Logs</a>
+    </div>
+  </nav>
+
+  <main class="p-6">
+    {{template "content" .}}
+  </main>
+
+</body>
+</html>
+{{end}}
