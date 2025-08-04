@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About ZeroSatin121</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* 🎯 Gentle Bounce Animation */
     @keyframes gentleBounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
@@ -96,17 +96,90 @@
         </div>
       </div>
 
+      <!-- 📊 Bug Metrics Graphs -->
+      <h2 class="text-xl font-semibold mt-12 mb-4">Bug Metrics</h2>
+      <div class="flex flex-col md:flex-row gap-6 justify-center items-center w-full">
+        <div class="w-full md:w-1/2">
+          <canvas id="severityChart" class="bg-white p-2 rounded shadow w-full h-40"></canvas>
+        </div>
+        <div class="w-full md:w-1/2">
+          <canvas id="statusChart" class="bg-white p-2 rounded shadow w-full h-40"></canvas>
+        </div>
+      </div>
+
       <a href="/" class="mt-10 inline-block text-sm text-gray-600 underline hover:text-black">
         ← home Page
       </a>
-
-      <!-- <div class="mt-6 space-x-4">
-        <a href="/audit-logs" class="text-sm text-gray-600 underline hover:text-blue-400">Smart Contract Audit Challenge</a>
-        <a href="/bug-logs" class="text-sm text-gray-600 underline hover:text-blue-400">Bug Hunting Tracker</a>
-        <a href="/daily-log" class="text-sm text-gray-600 underline hover:text-blue-400">Write a Daily Log</a>
-      </div> -->
     </div>
   </main>
 
+  <!-- 📈 Chart Script -->
+  <script>
+    let severityChart, statusChart;
+
+    function renderCharts(data) {
+      const severityCtx = document.getElementById("severityChart").getContext("2d");
+      const statusCtx = document.getElementById("statusChart").getContext("2d");
+
+      if (severityChart) severityChart.destroy();
+      if (statusChart) statusChart.destroy();
+
+      severityChart = new Chart(severityCtx, {
+        type: "bar",
+        data: {
+          labels: ["P1", "P2", "P3", "P4", "P5"],
+          datasets: [{
+            data: Object.values(data.bug_severity).map(Number),
+            backgroundColor: ["#ef4444", "#f97316", "#facc15", "#4ade80", "#3b82f6"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: {
+              display: true,
+              ticks: {
+                color: "#374151",
+                font: { size: 12 }
+              },
+              grid: { display: false }
+            },
+            y: { display: false }
+          }
+        }
+      });
+
+      statusChart = new Chart(statusCtx, {
+        type: "bar",
+        data: {
+          labels: ["Triaged", "Informative", "Duplicate", "Not Applicable"],
+          datasets: [{
+            data: Object.values(data.bug_status).map(Number),
+            backgroundColor: ["#a78bfa", "#22d3ee", "#9ca3af", "#14b8a6"]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: {
+              display: true,
+              ticks: {
+                color: "#374151",
+                font: { size: 12 }
+              },
+              grid: { display: false }
+            },
+            y: { display: false }
+          }
+        }
+      });
+    }
+
+    fetch("/api/metrics")
+      .then(res => res.json())
+      .then(renderCharts);
+  </script>
 </body>
 </html>
