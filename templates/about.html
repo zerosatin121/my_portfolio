@@ -115,71 +115,78 @@
 
   <!-- 📈 Chart Script -->
   <script>
-    let severityChart, statusChart;
+  let severityChart, statusChart;
 
-    function renderCharts(data) {
-      const severityCtx = document.getElementById("severityChart").getContext("2d");
-      const statusCtx = document.getElementById("statusChart").getContext("2d");
+  function renderCharts(data) {
+    const severityCtx = document.getElementById("severityChart").getContext("2d");
+    const statusCtx = document.getElementById("statusChart").getContext("2d");
 
-      if (severityChart) severityChart.destroy();
-      if (statusChart) statusChart.destroy();
+    if (severityChart) severityChart.destroy();
+    if (statusChart) statusChart.destroy();
 
-      severityChart = new Chart(severityCtx, {
-        type: "bar",
-        data: {
-          labels: ["P1", "P2", "P3", "P4", "P5"],
-          datasets: [{
-            data: Object.values(data.bug_severity).map(Number),
-            backgroundColor: ["#ef4444", "#f97316", "#facc15", "#4ade80", "#3b82f6"]
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: {
-              display: true,
-              ticks: {
-                color: "#374151",
-                font: { size: 12 }
-              },
-              grid: { display: false }
+    // Severity Chart
+    severityChart = new Chart(severityCtx, {
+      type: "bar",
+      data: {
+        labels: ["P1", "P2", "P3", "P4", "P5"],
+        datasets: [{
+          data: ["P1", "P2", "P3", "P4", "P5"].map(label => data.bug_severity[label] || 0),
+          backgroundColor: ["#ef4444", "#f97316", "#facc15", "#4ade80", "#3b82f6"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            display: true,
+            ticks: {
+              color: "#374151",
+              font: { size: 12 }
             },
-            y: { display: false }
-          }
+            grid: { display: false }
+          },
+          y: { display: false }
         }
-      });
+      }
+    });
 
-      statusChart = new Chart(statusCtx, {
-        type: "bar",
-        data: {
-          labels: ["Triaged", "Informative", "Duplicate", "Not Applicable"],
-          datasets: [{
-            data: Object.values(data.bug_status).map(Number),
-            backgroundColor: ["#a78bfa", "#22d3ee", "#9ca3af", "#14b8a6"]
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: {
-              display: true,
-              ticks: {
-                color: "#374151",
-                font: { size: 12 }
-              },
-              grid: { display: false }
+    // Status Chart
+    const statusLabels = ["triaged", "informational", "duplicate", "not_applicable"];
+    const statusDisplayLabels = ["Triaged", "Informational", "Duplicate", "Not Applicable"];
+    const statusValues = statusLabels.map(label => data.bug_status[label] || 0);
+
+    statusChart = new Chart(statusCtx, {
+      type: "bar",
+      data: {
+        labels: statusDisplayLabels,
+        datasets: [{
+          data: statusValues,
+          backgroundColor: ["#a78bfa", "#22d3ee", "#9ca3af", "#14b8a6"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            display: true,
+            ticks: {
+              color: "#374151",
+              font: { size: 12 }
             },
-            y: { display: false }
-          }
+            grid: { display: false }
+          },
+          y: { display: false }
         }
-      });
-    }
+      }
+    });
+  }
 
-    fetch("/api/metrics")
-      .then(res => res.json())
-      .then(renderCharts);
-  </script>
+  fetch("/api/metrics")
+    .then(res => res.json())
+    .then(renderCharts);
+</script>
+
 </body>
 </html>
