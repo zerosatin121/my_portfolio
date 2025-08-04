@@ -47,7 +47,6 @@ func main() {
     router.Static("/static", "./static")
 
     tmpl := template.Must(template.ParseFiles(
-        "templates/layout.html",
         "templates/index.html",
         "templates/about.html",
         "templates/log.html",
@@ -113,6 +112,14 @@ func main() {
         }
         c.HTML(http.StatusOK, "bug_logs.html", gin.H{"Logs": bugLogs})
     })
+
+    router.GET("/calendar", func(c *gin.Context) {
+    tmpl := template.Must(template.ParseFiles("templates/calendar.html"))
+    tmpl.ExecuteTemplate(c.Writer, "calendar.html", nil)
+})
+
+router.StaticFile("/download-logs", "./logs/logs.json")
+
 
     router.Run(":8080")
 }
