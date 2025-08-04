@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Update Bug Metrics</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black font-mono min-h-screen">
+  <nav class="w-full px-6 py-4 flex justify-between items-center text-black font-mono">
+    <div class="text-lg font-bold">ZeroSatin121</div>
+    <div class="space-x-6 text-sm">
+      <a href="/" class="hover:underline">Home</a>
+      <a href="/about" class="hover:underline">About</a>
+    </div>
+  </nav>
+
+  <main class="flex flex-col items-center justify-center px-4 py-10">
+    <div class="max-w-2xl w-full">
+      <h2 class="text-xl font-semibold mb-6 text-center">Update Bug Metrics</h2>
+      <form id="metricsForm" class="space-y-4 text-left">
+        <div class="grid grid-cols-2 gap-4">
+          <input name="P1" type="number" placeholder="P1" class="border p-2 rounded" />
+          <input name="P2" type="number" placeholder="P2" class="border p-2 rounded" />
+          <input name="P3" type="number" placeholder="P3" class="border p-2 rounded" />
+          <input name="P4" type="number" placeholder="P4" class="border p-2 rounded" />
+          <input name="P5" type="number" placeholder="P5" class="border p-2 rounded" />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <input name="duplicate" type="number" placeholder="Duplicate" class="border p-2 rounded" />
+          <input name="informational" type="number" placeholder="Informational" class="border p-2 rounded" />
+          <input name="not_applicable" type="number" placeholder="Not Applicable" class="border p-2 rounded" />
+          <input name="triaged" type="number" placeholder="Triaged" class="border p-2 rounded" />
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("metricsForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        bug_severity: {
+          P1: +form.P1.value || 0,
+          P2: +form.P2.value || 0,
+          P3: +form.P3.value || 0,
+          P4: +form.P4.value || 0,
+          P5: +form.P5.value || 0
+        },
+        bug_status: {
+          duplicate: +form.duplicate.value || 0,
+          informational: +form.informational.value || 0,
+          not_applicable: +form.not_applicable.value || 0,
+          triaged: +form.triaged.value || 0
+        }
+      };
+
+      await fetch("/api/update-metrics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      alert("Metrics updated!");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
